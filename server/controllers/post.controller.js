@@ -18,6 +18,15 @@ export function getPosts(req, res) {
   });
 }
 
+export function editPost(req, res) {
+  Post.update({ cuid: req.params.cuid }, req.body.post).exec((err, post) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({ post });
+  });
+}
+
 /**
  * Save a post
  * @param req
@@ -76,5 +85,23 @@ export function deletePost(req, res) {
     post.remove(() => {
       res.status(200).end();
     });
+  });
+}
+
+export function thumbUpPost(req, res) {
+  Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+   res.json({ post });
+  });
+}
+
+export function thumbDownPost(req, res) {
+  Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+   res.json({ post });
   });
 }

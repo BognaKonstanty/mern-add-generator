@@ -7,6 +7,8 @@ export default {
     twitterMessage: 'We are on Twitter',
     by: 'By',
     deletePost: 'Delete Post',
+    thumbUpPost: 'Thumb Up',
+    thumbDownPost: 'Thumb Down',
     createNewPost: 'Create new post',
     authorName: 'Author\'s Name',
     postTitle: 'Post Title',
@@ -27,5 +29,6 @@ export default {
     	  =1 {has # comment}
     	  other {has # comments}
     	} as of {date}`,
+    editPost: 'Edit Post'    
   },
 };

@@ -24,6 +24,14 @@ class PostListPage extends Component {
     }
   };
 
+  handleThumbUpPost = post => {
+    this.props.dispatch(thumbUpPostRequest(this.props.post.cuid));
+  };
+
+  handleThumbDownPost = post => {
+    this.props.dispatch(thumbDownPostRequest(this.props.post.cuid));
+  };
+
   handleAddPost = (name, title, content) => {
     this.props.dispatch(toggleAddPost());
     this.props.dispatch(addPostRequest({ name, title, content }));
@@ -34,6 +42,8 @@ class PostListPage extends Component {
       <div>
         <PostCreateWidget addPost={this.handleAddPost} showAddPost={this.props.showAddPost} />
         <PostList handleDeletePost={this.handleDeletePost} posts={this.props.posts} />
+        <PostList handleThumbUpPost={this.handleThumbUpPost} posts={this.props.posts} />
+        <PostList handleThumbDownPost={this.handleThumbDownPost} posts={this.props.posts} />
       </div>
     );
   }
