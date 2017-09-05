@@ -6,19 +6,6 @@ import { thumbDownPostRequest, thumbUpPostRequest } from '../../PostActions';
 // Import Style
 import styles from './PostListItem.css';
 
-
-/*handleThumbUpPost = () => {
-    this.props.dispatch(
-      thumbUpPostRequest(this.props.post.cuid)
-    );
-  };
-
-  handleThumbDownPost = () => {
-    this.props.dispatch(
-      thumbDownPostRequest(this.props.post.cuid)
-    );
-  };
-*/
 function PostListItem(props) {
   return (
     <div className={styles['single-post']}>
@@ -29,9 +16,9 @@ function PostListItem(props) {
       </h3>
       <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
       <p className={styles['post-desc']}>{props.post.content}</p>
-      <p className={styles['post-action']}><a href="#" onClick={props.onDelete}><FormattedMessage id="deletePost" /></a></p>
-      <p className={styles['post-action']}><a href="#" onClick={props.thumbUpCount}><FormattedMessage id="thumbUpPost" /></a></p>
-      <p className={styles['post-action']}><a href="#" onClick={props.thumbDownCount}><FormattedMessage id="thumbDownPost" /></a></p>
+      <p className={styles['post-action']}><a href="#" onClick={() => props.onDelete(props.post)}><FormattedMessage id="deletePost" /></a></p>
+      <p className={styles['post-action']}><a href="#" onClick={() => props.thumbUpPost(props.post)}><FormattedMessage id="thumbUpPost" /></a></p>
+      <p className={styles['post-action']}><a href="#" onClick={() => props.thumbDownPost(props.post)}><FormattedMessage id="thumbDownPost" /></a></p>
       <hr className={styles.divider} />
     </div>
   );
@@ -46,9 +33,8 @@ PostListItem.propTypes = {
     cuid: PropTypes.string.isRequired,
   }).isRequired,
   onDelete: PropTypes.func.isRequired,
-  thumbUpPost: PropTypes.number.isRequired,
-  thumbDownPost: PropTypes.number.isRequired,
-  dispatch: PropTypes.func.isRequired,
+  thumbUpPost: PropTypes.func.isRequired,
+  thumbDownPost: PropTypes.func.isRequired
 };
 
 export default PostListItem;
