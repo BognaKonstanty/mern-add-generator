@@ -1,17 +1,19 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 
 // Import Components
 import PostList from '../../components/PostList';
 import PostCreateWidget from '../../components/PostCreateWidget/PostCreateWidget';
 
 // Import Actions
-import { addPostRequest, fetchPosts, deletePostRequest } from '../../PostActions';
+import { addPostRequest, fetchPosts, deletePostRequest, thumbDownPostRequest, thumbUpPostRequest } from '../../PostActions';
 import { toggleAddPost } from '../../../App/AppActions';
 
 // Import Selectors
 import { getShowAddPost } from '../../../App/AppReducer';
 import { getPosts } from '../../PostReducer';
+
 
 class PostListPage extends Component {
   componentDidMount() {
@@ -25,11 +27,11 @@ class PostListPage extends Component {
   };
 
   handleThumbUpPost = post => {
-    this.props.dispatch(thumbUpPostRequest(this.props.post.cuid));
+    this.props.dispatch(thumbUpPostRequest(post));
   };
 
   handleThumbDownPost = post => {
-    this.props.dispatch(thumbDownPostRequest(this.props.post.cuid));
+    this.props.dispatch(thumbDownPostRequest(post));
   };
 
   handleAddPost = (name, title, content) => {
@@ -38,6 +40,7 @@ class PostListPage extends Component {
   };
 
   render() {
+    
     return (
       <div>
         <PostCreateWidget addPost={this.handleAddPost} showAddPost={this.props.showAddPost} />
@@ -65,6 +68,9 @@ PostListPage.propTypes = {
     name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    //thumbUpCount: PropTypes.number.isRequired,
+    //thumbDownCount: PropTypes.number.isRequired,
   })).isRequired,
   showAddPost: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,

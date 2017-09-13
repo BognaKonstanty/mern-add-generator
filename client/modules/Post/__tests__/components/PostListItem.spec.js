@@ -8,6 +8,8 @@ const post = { name: 'Prashant', title: 'Hello Mern', slug: 'hello-mern', cuid: 
 const props = {
   post,
   onDelete: () => {},
+  thumbUpPost: () => {},
+  thumbDownPost: () => {}
 };
 
 test('renders properly', t => {
@@ -29,6 +31,8 @@ test('has correct props', t => {
   t.deepEqual(wrapper.prop('post'), props.post);
   t.is(wrapper.prop('onClick'), props.onClick);
   t.is(wrapper.prop('onDelete'), props.onDelete);
+  t.is(wrapper.prop('thumbUpPost'), props.thumbUpPost);
+  t.is(wrapper.prop('thumbDownPost'), props.thumbDownPost);
 });
 
 test('calls onDelete', t => {
@@ -37,6 +41,28 @@ test('calls onDelete', t => {
     <PostListItem post={post} onDelete={onDelete} />
   );
 
+  test('calls thumbUpPost', t => {
+  const thumbUpPost = sinon.spy();
+  const wrapper = shallowWithIntl(
+    <PostListItem post={post} thumbUpPost={thumbUpPost} />
+  );
+
+test('calls thumbDownPost', t => {
+  const thumbDownPost = sinon.spy();
+  const wrapper = shallowWithIntl(
+    <PostListItem post={post} thumbDownPost={thumbDownPost} />
+  );
+
+
   wrapper.find('.post-action > a').first().simulate('click');
   t.truthy(onDelete.calledOnce);
+});
+
+
+wrapper.find('.post-action > a').first().simulate('click');
+  t.truthy(thumbUpPost.calledOnce);
+});
+
+  wrapper.find('.post-action > a').first().simulate('click');
+  t.truthy(thumbDownPost.calledOnce);
 });

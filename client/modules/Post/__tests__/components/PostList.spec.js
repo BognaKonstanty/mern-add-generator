@@ -10,7 +10,7 @@ const posts = [
 
 test('renders the list', t => {
   const wrapper = shallow(
-    <PostList posts={posts} handleShowPost={() => {}} handleDeletePost={() => {}} />
+    <PostList posts={posts} handleShowPost={() => {}} handleDeletePost={() => {}} handleThumbUpPost={() => {}}  handleThumbDownPost={() => {}}/>
   );
 
   t.is(wrapper.find('PostListItem').length, 2);
